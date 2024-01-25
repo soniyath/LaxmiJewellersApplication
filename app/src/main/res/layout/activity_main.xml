@@ -1,24 +1,67 @@
 <!-- activity_login.xml -->
-<LinearLayout android:id="@+id/linear_layout"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primaryGrey"
-    android:paddingHorizontal="130dp"
-    android:paddingBottom="100dp"
-    android:layout_gravity="center"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+android:id="@+id/linear_layout"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/primaryGrey"
+android:paddingHorizontal="130dp"
+android:layout_gravity="center"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:layout_gravity="center"
-        android:id="@+id/LaxmiJewellersLogo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:cardElevation="10dp"
-        android:contentDescription="@string/LogoContentDescription"
-        android:src="@drawable/img"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryGrey"
+        android:layout_marginEnd="-130dp"
+        android:layout_marginStart="-130dp">
+
+        <ImageView
+            android:id="@+id/LaxmiJewellersLogo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/LogoContentDescription"
+            android:src="@drawable/img" />
+
+        <LinearLayout
+            android:id="@+id/adminRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="130dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/LaxmiJewellersLogo"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/adminicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primaryWhite"
+                android:contentDescription="@string/adminIcon"
+                android:padding="8dp"
+                android:src="@drawable/adminicon" />
+
+            <TextView
+                android:id="@+id/AdminRegistrationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primaryWhite"
+                android:textColor="@color/primaryGreen"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/adminRegistration"
+                android:textSize="30sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/loginCardView"
         android:layout_width="match_parent"
@@ -159,6 +202,7 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/primaryGreen"
                 android:text="@string/LoginButton"
+                android:contentDescription="@string/LoginButton"
                 app:iconTint="@color/primaryGreen" />
             <TextView
                 android:id="@+id/forgotPasswordTextView"

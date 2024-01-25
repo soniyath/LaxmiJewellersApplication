@@ -17,4 +17,7 @@
     <string name="registerButton">Register</string>
     <string name="passwordenterHint">Enter Password</string>
     <string name="AdminRegisterTitle">ADMIN REGISTRATION</string>
+    <string name="adminRegistration">Admin\nRegistration</string>
+    <string name="enterPassword">Enter Password here</string>
+    <string name="adminIcon">Admin Registration Icon</string>
 </resources>
