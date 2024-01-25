@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:alpha="0.7">
+    <item android:top="10dp" android:left="10dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#B30D5654" /> <!-- Dark green color -->
+        </shape>
+    </item>
+    <item android:left="0dp" android:bottom="15dp" android:right="15dp" android:top="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF" /> <!-- Background color of the CardView -->
+            <corners android:radius="0dp" /> <!-- Adjust the radius based on your preference -->
+        </shape>
+    </item>
+</layer-list>

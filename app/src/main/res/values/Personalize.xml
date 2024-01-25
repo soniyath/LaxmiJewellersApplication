@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:buttonStyle">@style/Button</item>
+    </style>
+
+    <style name="Button" parent="Widget.AppCompat.Button">
+        <item name="android:minWidth" type="style">350dp</item>
+        <item name="android:minHeight" type="style">60dp</item>
+        <item name="android:textColor" type="style">@color/primaryWhite</item>
+        <item name="android:background" type="style">@color/primaryGreen</item>
+        <item name="android:textSize" type="style">40sp</item>
+    </style>
+</resources>

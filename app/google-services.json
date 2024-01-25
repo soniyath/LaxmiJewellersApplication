@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "671775691699",
+    "project_id": "laxmijewellersapplication",
+    "storage_bucket": "laxmijewellersapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671775691699:android:f75041d8750d513981b1c6",
+        "android_client_info": {
+          "package_name": "com.example.laxmijewellersapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu2h--DptkaS3bvq1EMev-KrKkXH9-XrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

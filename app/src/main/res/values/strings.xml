@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LaxmiJewellersApplication</string>
+    <string name="LoginTitle">LOGIN</string>
+    <string name="passwordHint">*********</string>
+    <string name="emailHint">Email</string>
+    <string name="LoginButton">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="RetrieveAccount">RETRIEVE ACCOUNT</string>
+    <string name="DashboardTitle">Dashboard</string>
+    <string name="LogoContentDescription">Laxmi Jewellers Logo</string>
+    <string name="emailicon">EmailIcon</string>
+</resources>
