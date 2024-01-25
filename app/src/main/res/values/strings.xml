@@ -9,4 +9,12 @@
     <string name="DashboardTitle">Dashboard</string>
     <string name="LogoContentDescription">Laxmi Jewellers Logo</string>
     <string name="emailicon">EmailIcon</string>
+    <string name="RegisterTitle">REGISTER</string>
+    <string name="usernameIcon">Username Icon</string>
+    <string name="usernameHint">Username</string>
+    <string name="reenterPassword">Re-Enter Password</string>
+    <string name="reenterPasswordHint">Re-Enter Password</string>
+    <string name="registerButton">Register</string>
+    <string name="passwordenterHint">Enter Password</string>
+    <string name="AdminRegisterTitle">ADMIN REGISTRATION</string>
 </resources>

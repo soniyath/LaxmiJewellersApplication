@@ -1,0 +1,275 @@
+<!-- activity_register_user.xml -->
+<LinearLayout android:id="@+id/linear_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryGrey"
+    android:paddingHorizontal="130dp"
+    android:paddingBottom="10dp"
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/LaxmiJewellersLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/LogoContentDescription"
+        android:src="@drawable/img"
+        />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loginCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="350dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="150dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:gravity="center"
+            android:background="@drawable/card_shadow"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AdminRegisterTitle"
+                android:textSize="60sp"
+                android:textStyle="bold"
+                android:textColor="@color/primaryGreen"
+                android:layout_marginBottom="15dp"
+                />
+            <LinearLayout
+                android:id="@+id/usernameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:background="@color/primaryGrey"
+
+                >
+                <ImageView
+                    android:id="@+id/UsernameIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/emailicon"
+                    android:layout_gravity="center_vertical"
+                    android:padding="8dp"
+                    android:background="@color/primaryGrey"
+                    android:contentDescription="@string/usernameIcon" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/usernameInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/primaryGrey"
+                    android:autofillHints="Username">
+
+                    <com.google.android.material.textfield.TextInputEditText
+
+                        android:id="@+id/UsernameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/primaryGrey"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/mediumGrey"
+                        android:textColorHint="@color/lightGrey"
+                        android:maxLines="1"
+                        android:textSize="30sp"
+                        android:hint="@string/usernameHint"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginBottom="15dp"
+                android:paddingBottom="15dp"/>
+
+
+<!--            Email Address            -->
+            <LinearLayout
+                android:id="@+id/emailEditLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:background="@color/primaryGrey"
+
+                >
+                <ImageView
+                    android:id="@+id/EmailIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/email"
+                    android:layout_gravity="center_vertical"
+                    android:padding="8dp"
+                    android:background="@color/primaryGrey"
+                    android:contentDescription="@string/emailicon" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/primaryGrey"
+                    android:autofillHints="Email">
+
+                    <com.google.android.material.textfield.TextInputEditText
+
+                        android:id="@+id/emailEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/primaryGrey"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/mediumGrey"
+                        android:textColorHint="@color/lightGrey"
+                        android:maxLines="1"
+                        android:textSize="30sp"
+                        android:hint="@string/emailHint"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginBottom="15dp"
+                android:paddingBottom="15dp"/>
+
+<!--            PASSWORD           -->
+
+
+            <LinearLayout
+                android:id="@+id/passwordLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="start"
+                >
+                <ImageView
+                    android:id="@+id/passwordIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/passwordicon"
+                    android:layout_gravity="center_vertical"
+                    android:padding="8dp"
+                    android:background="@color/primaryGrey"
+                    android:contentDescription="@string/passwordHint" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passwordTextEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/primaryGrey"
+                    android:hint="@string/passwordenterHint"
+                    android:autofillHints="password">
+
+                    <com.google.android.material.textfield.TextInputEditText
+
+                        android:id="@+id/passwordInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/primaryGrey"
+                        android:inputType="textPassword"
+                        android:textColor="@color/mediumGrey"
+                        android:textColorHint="@color/lightGrey"
+                        android:maxLines="1"
+                        android:textSize="30sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginBottom="15dp"
+                android:paddingBottom="15dp"/>
+
+<!--            RE-ENTER PASSWORD      -->
+            <LinearLayout
+                android:id="@+id/reenterPasswordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="start"
+                >
+                <ImageView
+                    android:id="@+id/reenterPasswordIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/passwordicon"
+                    android:layout_gravity="center_vertical"
+                    android:padding="8dp"
+                    android:background="@color/primaryGrey"
+                    android:contentDescription="@string/reenterPassword" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/reenterPasswordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/primaryGrey"
+                    android:hint="@string/reenterPasswordHint"
+                    android:autofillHints="password">
+
+                    <com.google.android.material.textfield.TextInputEditText
+
+                        android:id="@+id/reenterPasswordInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/primaryGrey"
+                        android:inputType="textPassword"
+                        android:textColor="@color/mediumGrey"
+                        android:textColorHint="@color/lightGrey"
+                        android:maxLines="1"
+                        android:textSize="30sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/edit_text_border"
+                android:layout_marginBottom="15dp"
+                android:paddingBottom="15dp"/>
+
+
+
+<!--            REGISTER BUTTON         -->
+
+
+            <Button
+                android:id="@+id/registerButton"
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/primaryGreen"
+                android:text="@string/registerButton"
+                app:iconTint="@color/primaryGreen" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
