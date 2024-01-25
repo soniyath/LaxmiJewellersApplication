@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navSell"
+        android:title="Sell"
+        android:icon="@drawable/shoppingcart"
+        android:padding="16dp"
+        android:textSize="25sp" />
+    <item
+        android:id="@+id/navDashboard"
+        android:title="Dashboard"
+        android:icon="@drawable/dashboard"/>
+    <item
+        android:id="@+id/navCatalog"
+        android:title="Catalog"
+        android:icon="@drawable/catalog"/>
+    <item
+        android:id="@+id/navInventory"
+        android:title="Inventory"
+        android:icon="@drawable/inventory"/>
+    <item
+    android:id="@+id/navReporting"
+    android:title="Reporting"
+        android:icon="@drawable/reporting"/>
+    <item
+        android:id="@+id/navSettings"
+        android:title="Settings"
+        android:icon="@drawable/settings"/>
+
+</menu>
