@@ -10,5 +10,6 @@
         <item name="android:textColor" type="style">@color/primaryWhite</item>
         <item name="android:background" type="style">@color/primaryGreen</item>
         <item name="android:textSize" type="style">40sp</item>
+        <item name="android:layout_margin" type="style">10dp</item>
     </style>
 </resources>

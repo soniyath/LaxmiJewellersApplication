@@ -8,10 +8,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:text="@string/DashboardTitle"
+        android:text="@string/ReportingTitle"
         android:textSize="50sp"
         android:textColor="@color/primaryGreen"
         android:layout_gravity="center"
         />
-
 </LinearLayout>

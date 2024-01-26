@@ -22,4 +22,15 @@
     <string name="adminIcon">Admin Registration Icon</string>
     <string name="open_drawer">Open Drawer</string>
     <string name="close_drawer">Close Drawer</string>
+    <string name="sellButton">Sell</string>
+    <string name="dashboardButton">Dashboard</string>
+    <string name="catalogButton">Catalog</string>
+    <string name="inventoryButton">Inventory</string>
+    <string name="reportingButton">Reporting</string>
+    <string name="settingsButton">Settings</string>
+    <string name="SettingsTitle">SETTINGS</string>
+    <string name="CatalogTitle">CATALOG</string>
+    <string name="InventoryTitle">INVENTORY</string>
+    <string name="ReportingTitle">REPORTING</string>
+    <string name="SellTitle">SELL</string>
 </resources>
