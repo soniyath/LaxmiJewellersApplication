@@ -28,9 +28,16 @@
     <string name="inventoryButton">Inventory</string>
     <string name="reportingButton">Reporting</string>
     <string name="settingsButton">Settings</string>
-    <string name="SettingsTitle">SETTINGS</string>
+    <string name="SettingsTitle">USERS</string>
     <string name="CatalogTitle">CATALOG</string>
     <string name="InventoryTitle">INVENTORY</string>
     <string name="ReportingTitle">REPORTING</string>
     <string name="SellTitle">SELL</string>
+    <string name="AddUserButton">Add User</string>
+    <string name="user">User</string>
+    <string name="role">Role</string>
+    <string name="AdminAddUser">Admin (You)</string>
+    <string name="Employee1">Employee 1</string>
+    <string name="UserRegisterTitle">EMPLOYEE REGISTRATION</string>
+
 </resources>

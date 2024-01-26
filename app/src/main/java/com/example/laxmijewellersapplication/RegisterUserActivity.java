@@ -21,7 +21,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegisterUserActivity.this, SettingsActivity.class));
+                startActivity(new Intent(RegisterUserActivity.this, DashboardActivity.class));
             }
         });
     }

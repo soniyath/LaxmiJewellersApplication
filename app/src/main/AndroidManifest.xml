@@ -15,6 +15,9 @@
         android:theme="@style/Theme.LaxmiJewellersApplication"
         tools:targetApi="31">
         <activity
+            android:name=".AdminRegistration"
+            android:exported="false" />
+        <activity
             android:name=".SellActivity"
             android:exported="false" />
         <activity
