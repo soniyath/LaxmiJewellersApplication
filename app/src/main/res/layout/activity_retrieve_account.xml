@@ -14,4 +14,12 @@
         android:textStyle="bold"
         android:textColor="@color/primaryGreen"
         android:layout_marginBottom="15dp" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Button"
+        android:text="@string/settingsButton"
+    />
 </LinearLayout>

@@ -39,5 +39,6 @@
     <string name="AdminAddUser">Admin (You)</string>
     <string name="Employee1">Employee 1</string>
     <string name="UserRegisterTitle">EMPLOYEE REGISTRATION</string>
+    <string name="logOutButton">LOG OUT</string>
 
 </resources>

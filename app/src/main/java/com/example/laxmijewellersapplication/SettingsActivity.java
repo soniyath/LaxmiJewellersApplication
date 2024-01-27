@@ -17,13 +17,17 @@ public class SettingsActivity extends AppCompatActivity {
     private Button settingsButton;
 
     private Button addUserButton;
+
+    private Button logOutButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
 
-
+        logOutButton = findViewById(R.id.logOutButton);
         sellButton = findViewById(R.id.sellButton);
         dashboardButton = findViewById(R.id.dashboardButton);
         catalogButton = findViewById(R.id.catalogButton);
@@ -43,5 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(view -> startActivity(new Intent(SettingsActivity.this, SettingsActivity.class)));
 
         addUserButton.setOnClickListener(view -> startActivity(new Intent(SettingsActivity.this, RegisterUserActivity.class)));
+        logOutButton.setOnClickListener(view -> startActivity(new Intent(SettingsActivity.this, MainActivity.class)));
+
     }
 }

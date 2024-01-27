@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, DashboardActivity.class));
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
 
         });
@@ -47,7 +47,5 @@ public class MainActivity extends AppCompatActivity {
     public void retrieveAccount(View view){
         startActivity(new Intent( MainActivity.this, RetrieveAccountActivity.class));
     }
-
-
 
 }

@@ -8,9 +8,13 @@ import android.sax.StartElementListener;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthSettings;
+
 public class AdminRegistration extends AppCompatActivity {
 
     private Button adminRegistrationButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +25,7 @@ public class AdminRegistration extends AppCompatActivity {
         adminRegistrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminRegistration.this, DashboardActivity.class));
+                startActivity(new Intent(AdminRegistration.this, SettingsActivity.class));
             }
         });
 
