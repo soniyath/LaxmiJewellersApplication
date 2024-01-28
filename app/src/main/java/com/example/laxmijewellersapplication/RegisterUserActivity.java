@@ -3,11 +3,13 @@ package com.example.laxmijewellersapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -41,6 +43,8 @@ public class RegisterUserActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
 
+    private ImageView passwordHelperIcon;
+
 
     //Firestore Connection
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -64,6 +68,25 @@ public class RegisterUserActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
 
+        passwordHelperIcon = findViewById(R.id.passwordHelperIcon);
+        passwordHelperIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View dialogView = getLayoutInflater().inflate(R.layout.password_helper_chart, null);
+                Dialog passwordHelperDialog = new Dialog(RegisterUserActivity.this);
+                passwordHelperDialog.setContentView(dialogView);
+                Button closeButton = dialogView.findViewById(R.id.closeButton);
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        passwordHelperDialog.dismiss();
+                    }
+                });
+                passwordHelperDialog.show();
+            }
+        });
+
+
         //Checks what user is logged in
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -85,7 +108,8 @@ public class RegisterUserActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(emailEditText.getText().toString().trim())
                         && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
                         && !TextUtils.isEmpty(usernameEditText.getText().toString().trim())
-                        && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())){
+                        && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
+                        && !TextUtils.isEmpty(reenterPasswordEditText.getText().toString().trim())){
 
                     String email = emailEditText.getText().toString().trim();
                     String username = usernameEditText.getText().toString().trim();
@@ -93,16 +117,21 @@ public class RegisterUserActivity extends AppCompatActivity {
                     String reenterPassword = reenterPasswordEditText.getText().toString().trim();
 
                     if(passwordValidation(password, reenterPassword)) {
-                        createAdminEmailAccount(email, password, username);
+                        createEmployeeEmailAccount(email, password, username);
                     }
                     else{
-                        //Give an error to the user about password not being apt
-                        Toast.makeText(RegisterUserActivity.this, "Invalid Password", Toast.LENGTH_LONG).show();
+                        if (password.equals(reenterPassword)) {
+                            Toast.makeText(RegisterUserActivity.this, "Invalid Password: Please check required format.", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(RegisterUserActivity.this, "Passwords are not identical", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 }
                 else{
-                    Toast.makeText(RegisterUserActivity.this, "Invalid Password", Toast.LENGTH_SHORT).show();
-                }     startActivity(new Intent(RegisterUserActivity.this, SettingsActivity.class));
+                    Toast.makeText(RegisterUserActivity.this, "One or more fields empty.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -120,7 +149,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
 
     //Creating the method where email password and username are stored in our Firebase Authentication cloud DB
-    private void createAdminEmailAccount(String email, String password, String username){
+    private void createEmployeeEmailAccount(String email, String password, String username){
         if(!TextUtils.isEmpty(email)
                 && !TextUtils.isEmpty(password)
                 && !TextUtils.isEmpty(username)){
@@ -162,7 +191,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                                                                     startActivity(intent);
 
                                                                 }else{
-
+                                                                    Toast.makeText(RegisterUserActivity.this, "Object Null Referenced!", Toast.LENGTH_LONG).show();
 
                                                                 }
                                                             }
@@ -172,11 +201,16 @@ public class RegisterUserActivity extends AppCompatActivity {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(RegisterUserActivity.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(RegisterUserActivity.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
 
                                             }
                                         });
-
-
 
                             }
                             else{
@@ -187,6 +221,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterUserActivity.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
 
                         }
                     });

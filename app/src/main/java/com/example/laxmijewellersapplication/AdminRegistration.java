@@ -3,6 +3,7 @@ package com.example.laxmijewellersapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.sax.StartElementListener;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,12 +45,14 @@ public class AdminRegistration extends AppCompatActivity {
     //Firestore Connection
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("Users");
+    private CollectionReference collectionReference = db.collection("Admin");
     private TextInputEditText usernameEditText;
     private TextInputEditText emailEditText;
     private TextInputEditText passwordEditText;
 
     private TextInputEditText reEnterPasswordEditText;
+
+    private ImageView passwordHelperIcon;
 
 
 
@@ -65,7 +69,26 @@ public class AdminRegistration extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordInput);
         reEnterPasswordEditText = findViewById(R.id.reenterPasswordInput);
         adminRegistrationButton = findViewById(R.id.adminRegistrationButton);
+        passwordHelperIcon = findViewById(R.id.passwordHelperIcon);
 
+
+        //Password Helper Method
+        passwordHelperIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View dialogView = getLayoutInflater().inflate(R.layout.password_helper_chart, null);
+                Dialog passwordHelperDialog = new Dialog(AdminRegistration.this);
+                passwordHelperDialog.setContentView(dialogView);
+                Button closeButton = dialogView.findViewById(R.id.closeButton);
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        passwordHelperDialog.dismiss();
+                    }
+                });
+                passwordHelperDialog.show();
+            }
+        });
 
         //Firebase instantiation
         firebaseAuth = FirebaseAuth.getInstance();
@@ -92,23 +115,30 @@ public class AdminRegistration extends AppCompatActivity {
                 if(!TextUtils.isEmpty(emailEditText.getText().toString().trim())
                 && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
                 && !TextUtils.isEmpty(usernameEditText.getText().toString().trim())
-                && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())){
+                && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
+                && !TextUtils.isEmpty(reEnterPasswordEditText.getText().toString().trim())) {
 
                     String email = emailEditText.getText().toString().trim();
                     String username = usernameEditText.getText().toString().trim();
                     String password = passwordEditText.getText().toString().trim();
                     String reenterPassword = reEnterPasswordEditText.getText().toString().trim();
 
-                    if(passwordValidation(password, reenterPassword)) {
+                    if (passwordValidation(password, reenterPassword)) {
                         createAdminEmailAccount(email, password, username);
-                    }
-                    else{
+                    } else {
                         //Give an error to the user about password not being apt
-                        Toast.makeText(AdminRegistration.this, "Invalid Password", Toast.LENGTH_LONG).show();
+                        if (password.equals(reenterPassword)) {
+                            Toast.makeText(AdminRegistration.this, "Invalid Password: Please check required format.", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(AdminRegistration.this, "Passwords are not identical", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 }
                 else{
-                    Toast.makeText(AdminRegistration.this, "Invalid Password", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(AdminRegistration.this, "One or more fields empty", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -141,45 +171,45 @@ public class AdminRegistration extends AppCompatActivity {
                                 assert currentUser != null;
                                 String currentUserId = currentUser.getUid();
 
-
                                 //Creating a map for storing all the users in the Firebase database along with the
                                 //authentication panel
-                                Map<String, String> userObj = new HashMap<>();
-                                userObj.put("userId", currentUserId);
-                                userObj.put("username", username);
-                                userObj.put("email", email);
-                                userObj.put("role", "admin");
+                                Map<String, String> adminObj = new HashMap<>();
+                                adminObj.put("userId", currentUserId);
+                                adminObj.put("username", username);
+                                adminObj.put("email", email);
+                                adminObj.put("role", "admin");
 
 
                                 //save to our firestore database
-                               collectionReference.add(userObj)
+                               collectionReference.add(adminObj)
                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                            @Override
                                            public void onSuccess(DocumentReference documentReference) {
-                                                documentReference.get()
-                                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                                if(Objects.requireNonNull(task.getResult().exists())){
-                                                                    String name = task.getResult()
-                                                                            .getString("username");
-                                                                    Intent intent = new Intent(AdminRegistration.this, SettingsActivity.class);
-                                                                    intent.putExtra("username", name);
-                                                                    intent.putExtra("userId", currentUserId);
-                                                                    startActivity(intent);
+                                               documentReference.get()
+                                                       .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                           @Override
+                                                           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                               if (Objects.requireNonNull(task.getResult().exists())) {
+                                                                   String name = task.getResult()
+                                                                           .getString("username");
+                                                                   Intent intent = new Intent(AdminRegistration.this, SettingsActivity.class);
+                                                                   intent.putExtra("username", name);
+                                                                   intent.putExtra("userId", currentUserId);
+                                                                   startActivity(intent);
 
-                                                                }else{
+                                                               } else {
+                                                                   Toast.makeText(AdminRegistration.this, "Object Null Referenced!", Toast.LENGTH_LONG).show();
 
+                                                               }
+                                                           }
+                                                       })
+                                                       .addOnFailureListener(new OnFailureListener() {
+                                                           @Override
+                                                           public void onFailure(@NonNull Exception e) {
+                                                               Toast.makeText(AdminRegistration.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
 
-                                                                }
-                                                            }
-                                                        });
-                                           }
-                                       })
-                                       .addOnFailureListener(new OnFailureListener() {
-                                           @Override
-                                           public void onFailure(@NonNull Exception e) {
-
+                                                           }
+                                                       });
                                            }
                                        });
 
@@ -194,7 +224,7 @@ public class AdminRegistration extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            Toast.makeText(AdminRegistration.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
         }

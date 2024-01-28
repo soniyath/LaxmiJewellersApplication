@@ -162,6 +162,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="start"
+                android:background="@color/primaryGrey"
                 >
                 <ImageView
                     android:id="@+id/passwordIcon"
@@ -194,6 +195,14 @@
                         android:textSize="30sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/passwordHelperIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/passwordhelp"
+                    android:background="@color/primaryGrey"
+                    android:padding="5dp"
+                    android:layout_gravity="center"/>
 
 
 

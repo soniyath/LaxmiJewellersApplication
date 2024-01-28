@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 currentUser = firebaseAuth.getCurrentUser();
                 if (currentUser != null) {
                     //user is logged in...
+
                 } else {
                     //no user yet...
                 }
@@ -75,7 +76,16 @@ public class MainActivity extends AppCompatActivity {
                         && !TextUtils.isEmpty(passwordInput.getText().toString().trim())) {
                     signInUser(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim());
                 } else {
-                    showToast("Authentication failed: One of the fields are empty");                }
+                    showToast("Authentication failed: One or more fields empty");                }
+            }
+        });
+
+
+        adminRegistration = findViewById(R.id.adminRegistration);
+        adminRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AdminRegistration.class));
             }
         });
     }
@@ -88,10 +98,7 @@ public class MainActivity extends AppCompatActivity {
                          if (task.isSuccessful()) {
                              showToast("Sign in successful!");
                              startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                         } else {
-                             showToast("Authentication failed." + task.getException().getMessage());
                          }
-
                      }
                  })
                  .addOnFailureListener(new OnFailureListener() {
