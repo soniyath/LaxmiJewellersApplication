@@ -50,7 +50,7 @@
                 android:layout_marginBottom="15dp"
                 />
             <LinearLayout
-                android:id="@+id/usernameEditText"
+                android:id="@+id/usernameEditLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -77,7 +77,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
 
-                        android:id="@+id/UsernameEditText"
+                        android:id="@+id/usernameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/primaryGrey"
@@ -174,7 +174,7 @@
                     android:contentDescription="@string/passwordHint" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/passwordTextEdit"
+                    android:id="@+id/passwordTextLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/primaryGrey"
@@ -224,7 +224,7 @@
                     android:contentDescription="@string/reenterPassword" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/reenterPasswordEditText"
+                    android:id="@+id/reenterPasswordEditLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/primaryGrey"
@@ -244,8 +244,6 @@
                         android:textSize="30sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-
 
             </LinearLayout>
             <View
