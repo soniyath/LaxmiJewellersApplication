@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +41,8 @@ public class AdminRegistration extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
+
+    private ProgressBar progressBar;
 
 
     //Firestore Connection
@@ -70,6 +73,7 @@ public class AdminRegistration extends AppCompatActivity {
         reEnterPasswordEditText = findViewById(R.id.reenterPasswordInput);
         adminRegistrationButton = findViewById(R.id.adminRegistrationButton);
         passwordHelperIcon = findViewById(R.id.passwordHelperIcon);
+        progressBar = findViewById(R.id.progressBar);
 
 
         //Password Helper Method
@@ -111,6 +115,7 @@ public class AdminRegistration extends AppCompatActivity {
         adminRegistrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
 
                 if(!TextUtils.isEmpty(emailEditText.getText().toString().trim())
                 && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
@@ -126,6 +131,7 @@ public class AdminRegistration extends AppCompatActivity {
                     if (passwordValidation(password, reenterPassword)) {
                         createAdminEmailAccount(email, password, username);
                     } else {
+                        progressBar.setVisibility(View.GONE);
                         //Give an error to the user about password not being apt
                         if (password.equals(reenterPassword)) {
                             Toast.makeText(AdminRegistration.this, "Invalid Password: Please check required format.", Toast.LENGTH_SHORT).show();
@@ -185,6 +191,7 @@ public class AdminRegistration extends AppCompatActivity {
                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                            @Override
                                            public void onSuccess(DocumentReference documentReference) {
+                                               progressBar.setVisibility(View.GONE);
                                                documentReference.get()
                                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                            @Override
@@ -206,6 +213,7 @@ public class AdminRegistration extends AppCompatActivity {
                                                        .addOnFailureListener(new OnFailureListener() {
                                                            @Override
                                                            public void onFailure(@NonNull Exception e) {
+                                                               progressBar.setVisibility(View.GONE);
                                                                Toast.makeText(AdminRegistration.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
 
                                                            }
@@ -216,20 +224,16 @@ public class AdminRegistration extends AppCompatActivity {
 
 
                             }
-                            else{
-                                //something went wrong
-                            }
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(AdminRegistration.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
-        }
-        else{
-
         }
     }
 

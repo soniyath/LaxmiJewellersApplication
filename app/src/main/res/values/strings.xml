@@ -40,5 +40,6 @@
     <string name="Employee1">Employee 1</string>
     <string name="UserRegisterTitle">EMPLOYEE REGISTRATION</string>
     <string name="logOutButton">LOG OUT</string>
+    <string name="password_helper_icon">Password Helper Icon</string>
 
 </resources>

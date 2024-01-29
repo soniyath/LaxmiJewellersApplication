@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -45,6 +46,8 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     private ImageView passwordHelperIcon;
 
+    private ProgressBar progressBar;
+
 
     //Firestore Connection
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -63,6 +66,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordInput);
         reenterPasswordEditText = findViewById(R.id.reenterPasswordInput);
         registerButton = findViewById(R.id.registerButton);
+        progressBar = findViewById(R.id.progressBar);
 
         //Firebase instantiation
         firebaseAuth = FirebaseAuth.getInstance();
@@ -102,14 +106,15 @@ public class RegisterUserActivity extends AppCompatActivity {
         };
 
         registerButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 if(!TextUtils.isEmpty(emailEditText.getText().toString().trim())
                         && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
                         && !TextUtils.isEmpty(usernameEditText.getText().toString().trim())
                         && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
                         && !TextUtils.isEmpty(reenterPasswordEditText.getText().toString().trim())){
+
 
                     String email = emailEditText.getText().toString().trim();
                     String username = usernameEditText.getText().toString().trim();
@@ -117,19 +122,25 @@ public class RegisterUserActivity extends AppCompatActivity {
                     String reenterPassword = reenterPasswordEditText.getText().toString().trim();
 
                     if(passwordValidation(password, reenterPassword)) {
+                        progressBar.setVisibility(View.VISIBLE);
                         createEmployeeEmailAccount(email, password, username);
                     }
                     else{
                         if (password.equals(reenterPassword)) {
+
+                            progressBar.setVisibility(View.GONE);
+
                             Toast.makeText(RegisterUserActivity.this, "Invalid Password: Please check required format.", Toast.LENGTH_SHORT).show();
 
                         } else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(RegisterUserActivity.this, "Passwords are not identical", Toast.LENGTH_SHORT).show();
 
                         }
                     }
                 }
                 else{
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterUserActivity.this, "One or more fields empty.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -158,6 +169,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                progressBar.setVisibility(View.GONE);
                                 //we take user to settings activity -- Dashboard after we finish this sub app
                                 currentUser = firebaseAuth.getCurrentUser();
                                 assert currentUser != null;
@@ -178,11 +190,13 @@ public class RegisterUserActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                             @Override
                                             public void onSuccess(DocumentReference documentReference) {
+                                                progressBar.setVisibility(View.GONE);
                                                 documentReference.get()
                                                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                                 if(Objects.requireNonNull(task.getResult().exists())){
+                                                                    progressBar.setVisibility(View.GONE);
                                                                     String name = task.getResult()
                                                                             .getString("username");
                                                                     Intent intent = new Intent(RegisterUserActivity.this, SettingsActivity.class);
@@ -191,6 +205,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                                                                     startActivity(intent);
 
                                                                 }else{
+                                                                    progressBar.setVisibility(View.GONE);
                                                                     Toast.makeText(RegisterUserActivity.this, "Object Null Referenced!", Toast.LENGTH_LONG).show();
 
                                                                 }
@@ -201,12 +216,14 @@ public class RegisterUserActivity extends AppCompatActivity {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+                                                progressBar.setVisibility(View.GONE);
                                                 Toast.makeText(RegisterUserActivity.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
 
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+                                                progressBar.setVisibility(View.GONE);
                                                 Toast.makeText(RegisterUserActivity.this, "Registration Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
 
                                             }
@@ -214,6 +231,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
                             }
                             else{
+                                progressBar.setVisibility(View.GONE);
                                 //something went wrong
                             }
                         }
