@@ -41,5 +41,7 @@
     <string name="UserRegisterTitle">EMPLOYEE REGISTRATION</string>
     <string name="logOutButton">LOG OUT</string>
     <string name="password_helper_icon">Password Helper Icon</string>
+    <string name="UserPrivilege">User Role: No User Logged in.</string>
+    <string name="currentUsername">User Email: No User Logged in.</string>
 
 </resources>

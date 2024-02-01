@@ -3,6 +3,7 @@ package com.example.laxmijewellersapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,21 +38,18 @@ public class RegisterUserActivity extends AppCompatActivity {
     private TextInputEditText emailEditText;
     private TextInputEditText passwordEditText;
     private TextInputEditText reenterPasswordEditText;
-    private Button registerButton;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
 
-    private ImageView passwordHelperIcon;
-
     private ProgressBar progressBar;
 
 
     //Firestore Connection
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("Users");
+    private final CollectionReference collectionReference = db.collection("Users");
 
 
     @Override
@@ -65,18 +62,18 @@ public class RegisterUserActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordInput);
         reenterPasswordEditText = findViewById(R.id.reenterPasswordInput);
-        registerButton = findViewById(R.id.registerButton);
+        Button registerButton = findViewById(R.id.registerButton);
         progressBar = findViewById(R.id.progressBar);
 
         //Firebase instantiation
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-        passwordHelperIcon = findViewById(R.id.passwordHelperIcon);
+        ImageView passwordHelperIcon = findViewById(R.id.passwordHelperIcon);
         passwordHelperIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View dialogView = getLayoutInflater().inflate(R.layout.password_helper_chart, null);
+                @SuppressLint("InflateParams") View dialogView = getLayoutInflater().inflate(R.layout.password_helper_chart, null);
                 Dialog passwordHelperDialog = new Dialog(RegisterUserActivity.this);
                 passwordHelperDialog.setContentView(dialogView);
                 Button closeButton = dialogView.findViewById(R.id.closeButton);
@@ -109,37 +106,36 @@ public class RegisterUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                if(!TextUtils.isEmpty(emailEditText.getText().toString().trim())
-                        && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
-                        && !TextUtils.isEmpty(usernameEditText.getText().toString().trim())
-                        && !TextUtils.isEmpty(passwordEditText.getText().toString().trim())
-                        && !TextUtils.isEmpty(reenterPasswordEditText.getText().toString().trim())){
+                if (!TextUtils.isEmpty(Objects.requireNonNull(passwordEditText.getText()).toString().trim())) {
+                    if (!TextUtils.isEmpty(Objects.requireNonNull(emailEditText.getText()).toString().trim()) && !TextUtils.isEmpty(Objects.requireNonNull(passwordEditText.getText()).toString().trim()) && !TextUtils.isEmpty(Objects.requireNonNull(usernameEditText.getText()).toString().trim()) && !TextUtils.isEmpty(Objects.requireNonNull(reenterPasswordEditText.getText()).toString().trim())) {
 
 
-                    String email = emailEditText.getText().toString().trim();
-                    String username = usernameEditText.getText().toString().trim();
-                    String password = passwordEditText.getText().toString().trim();
-                    String reenterPassword = reenterPasswordEditText.getText().toString().trim();
+                        String email = emailEditText.getText().toString().trim();
+                        String username = usernameEditText.getText().toString().trim();
+                        String password = passwordEditText.getText().toString().trim();
+                        String reenterPassword = reenterPasswordEditText.getText().toString().trim();
 
-                    if(passwordValidation(password, reenterPassword)) {
-                        progressBar.setVisibility(View.VISIBLE);
-                        createEmployeeEmailAccount(email, password, username);
-                    }
-                    else{
-                        if (password.equals(reenterPassword)) {
-
-                            progressBar.setVisibility(View.GONE);
-
-                            Toast.makeText(RegisterUserActivity.this, "Invalid Password: Please check required format.", Toast.LENGTH_SHORT).show();
-
+                        if (passwordValidation(password, reenterPassword)) {
+                            progressBar.setVisibility(View.VISIBLE);
+                            createEmployeeEmailAccount(email, password, username);
                         } else {
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(RegisterUserActivity.this, "Passwords are not identical", Toast.LENGTH_SHORT).show();
+                            if (password.equals(reenterPassword)) {
 
+                                progressBar.setVisibility(View.GONE);
+
+                                Toast.makeText(RegisterUserActivity.this, "Invalid Password: Please check required format.", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(RegisterUserActivity.this, "Passwords are not identical", Toast.LENGTH_SHORT).show();
+
+                            }
                         }
+                    } else {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(RegisterUserActivity.this, "One or more fields empty.", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
+                } else {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(RegisterUserActivity.this, "One or more fields empty.", Toast.LENGTH_SHORT).show();
                 }
@@ -243,9 +239,6 @@ public class RegisterUserActivity extends AppCompatActivity {
 
                         }
                     });
-        }
-        else{
-
         }
     }
 
